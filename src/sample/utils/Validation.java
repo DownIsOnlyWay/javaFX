@@ -6,8 +6,11 @@ import java.util.regex.Pattern;
 public class Validation {
 
     public static final String USERNAME_REGEX_PATTERN = "^[A-Za-z0-9]{5,13}$";
+    public static final String PASSWORD_REGEX_PATTERN = "^[a-zA-z0-9_]{5,13}$";
+    public static final String EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9@]$";
 
-    public static boolean isValidUsername(String username){
+
+    public static boolean isValidUsername(String username) {
 
         //sukuriamos validacijos taisykles pagal auksciau pasirasyta sablona
         Pattern pattern = Pattern.compile(USERNAME_REGEX_PATTERN);
@@ -16,5 +19,17 @@ public class Validation {
         //grazins true jeigu atitiks vartotojas duomenis validacija, false priesingu atveju
         return matcher.find();
 
+    }
+
+    public static boolean isValidPassword(String password) {
+        Pattern pattern = Pattern.compile(PASSWORD_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.find();
+    }
+
+    public static boolean isValidEmail(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.find();
     }
 }
