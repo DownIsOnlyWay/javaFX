@@ -14,6 +14,7 @@ import sample.Main;
 import sample.utils.Validation;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class RegisterController {
     @FXML
@@ -31,9 +32,7 @@ public class RegisterController {
 
 
     @FXML
-    protected void onRegisterButtonClick(ActionEvent event) throws Exception {
-
-
+    public void onRegisterButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
         String username = username_id.getText();
         String password = password_id.getText();
         String confPassword = confPassword_id.getText();
@@ -42,23 +41,23 @@ public class RegisterController {
 
         if (!Validation.isValidUsername(username)) {
             error_label.setVisible(true);
-            error_label.setText("Tik didziosios ir mazosios raides, skaiciai, ilgis nuo 5 iki 13 simboliu!");
+            error_label.setText("Neteisingas vardas. Tik didziosios ir mazosios raides, skaiciai, ilgis nuo 5 iki 13 simboliu!");
         } else if (!Validation.isValidPassword(password)) {
             error_label.setVisible(true);
-            error_label.setText("Tik dydžiosios ir mažosios raidės, skaičiai ir spec. ženklai !@#$%");
+            error_label.setText("Neteisingas slaptazodis. Tik didžiosios ir mažosios raidės, skaičiai ir spec. ženklai !@#$%");
         } else if (!password.equals(confPassword)) {
             error_label.setVisible(true);
             error_label.setText("Ne vienodi suvesti slaptazodziai");
         } else if (!Validation.isValidEmail(email)) {
             error_label.setVisible(true);
-            error_label.setText("El_Pasto adresas neatitinka reikalavimus");
+            error_label.setText("El_Pasto adresas neteisingas");
         } else {
-            Parent root = FXMLLoader.load(Main.class.getResource("view/login-view.fxml"));
+            Parent root1 = FXMLLoader.load(Main.class.getResource("view/login-view.fxml"));
             Stage loginStage = new Stage();
             loginStage.setTitle("Login");
-            loginStage.setScene(new Scene(root, 600, 400));
+            loginStage.setScene(new Scene(root1, 600, 400));
             loginStage.show();
-            ((Node) (event.getSource())).getScene().getWindow().hide();
+            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
         }
     }
 }
